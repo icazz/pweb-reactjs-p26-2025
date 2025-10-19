@@ -1,11 +1,12 @@
-// src/auth/auth.routes.ts
-
 import { Router } from 'express';
+import { register, login, getMe } from './auth.controller';
+import { authMiddleware } from '../middleware/auth.middleware';
 
-// 1. Buat instance router baru
 const router = Router();
 
-// (Nanti kita akan tambahkan router.post('/register', ...) di sini)
 
-// 2. WAJIB: Ekspor router ini agar 'index.ts' bisa mengimpornya
+router.post('/register', register);
+router.post('/login', login)
+router.get('/me', authMiddleware, getMe);
+
 export default router;
