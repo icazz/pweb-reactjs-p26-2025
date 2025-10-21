@@ -1,4 +1,6 @@
 import express, { Request, Response } from 'express';
+import authRoutes from './auth/auth.routes';
+import genreRoutes from './genres/genre.routes';
 
 // 1. Impor "Waiter" (Router)
 // Kita hanya impor 'authRoutes' dulu sesuai rencana
@@ -29,9 +31,9 @@ app.get('/health-check', (req: Request, res: Response) => {
 // 4. Pembagian Tugas "Waiter" (Router)
 // "Setiap pesanan yang awalnya '/auth', teruskan ke authRoutes"
 app.use('/auth', authRoutes);
+app.use('/genre', genreRoutes);
 
 // (Nanti Anda akan tambahkan pendaftaran router lain di sini)
-// app.use('/genre', genreRoutes);
 // app.use('/books', bookRoutes);
 // app.use('/transactions', transactionRoutes);
 
