@@ -5,6 +5,7 @@ import genreRoutes from './genres/genre.routes';
 // 1. Impor "Waiter" (Router)
 // Kita hanya impor 'authRoutes' dulu sesuai rencana
 import authRoutes from './auth/auth.routes';
+import transactionRoutes from './transactions/transaction.routes';
 
 // (Nanti Anda akan tambahkan impor lain di sini)
 // import genreRoutes from './genres/genre.routes';
@@ -17,6 +18,7 @@ const PORT = 8080; // Sesuai Postman {{BASE_URL}}
 // 2. Middleware (Alat Bantu)
 // Ini WAJIB ada agar server bisa membaca body JSON dari Postman
 app.use(express.json());
+app.use('/transactions', transactionRoutes);
 
 // 3. Endpoint Wajib Sesuai Soal
 // Ini untuk mengecek apakah server Anda hidup
