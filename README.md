@@ -14,10 +14,4 @@
 
 ## Pengaturan Proyek dan Database
 
-### Inisialisasi `node_modules/`
-
-`npm install`
-
-### Inisialisasi `generated/`
-
-`npx prisma generate`
+### Inisialisasi 
