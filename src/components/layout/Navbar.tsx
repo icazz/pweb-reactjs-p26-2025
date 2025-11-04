@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
             
             {/* Tampilkan email user (Requirement) */}
             <span className="navbar-user">
-              {user?.email} {/* Tampilkan email atau username */}
+              {user?.username || user?.email} {/* Tampilkan username, atau email jika username tidak ada */}
             </span>
             
             {/* Tombol Logout (Requirement) */}

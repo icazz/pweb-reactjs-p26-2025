@@ -12,7 +12,7 @@ export interface Book {
   publication_year: number;
   price: number;
   stock_quantity: number;
-  genre: string; // API mengembalikan genre sebagai STRING, bukan objek
+  genre: Genre; // API mengembalikan genre sebagai STRING, bukan objek
 }
 
 export interface NewBookData {
@@ -33,6 +33,7 @@ export type PaginatedResponse<T> = {
     limit: number;
     prev_page: number | null;
     next_page: number | null;
+    total?: number;
   };
 };
 
