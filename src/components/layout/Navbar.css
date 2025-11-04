@@ -1,0 +1,59 @@
+/* src/components/layout/Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-brand a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: #00aaff; /* Ganti dengan warna tema Anda */
+}
+
+.navbar-user {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.navbar-logout-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #d9534f; /* Merah */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navbar-logout-btn:hover {
+  background-color: #c9302c;
+}

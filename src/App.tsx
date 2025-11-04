@@ -1,0 +1,53 @@
+import { Routes, Route } from 'react-router-dom';
+
+// Import Layout
+import Navbar from './components/layout/Navbar';
+
+// Import Pages (Publik)
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/Auth/LoginPage';
+import RegisterPage from './pages/Auth/RegisterPage';
+
+// Import Pages (Protected)
+import BookListPage from './pages/Books/BookListPage';
+import BookDetailPage from './pages/Books/BookDetailPage';
+import AddBookPage from './pages/Books/AddBookPage';
+import TransactionListPage from './pages/Transactions/TransactionListPage';
+import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
+
+// Import Route Protector
+import ProtectedRoute from './routes/ProtectedRoute';
+
+function App() {
+  return (
+    <>
+      {/* Navbar akan tampil di semua halaman */}
+      <Navbar />
+      
+      {/* Konten halaman akan berganti di bawah ini */}
+      <main className="container"> {/* Pastikan class .container ada di index.css */}
+        <Routes>
+          {/* Rute Publik */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          
+          {/* Rute Terproteksi */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/books" element={<BookListPage />} />
+            <Route path="/books/add" element={<AddBookPage />} />
+            <Route path="/books/:id" element={<BookDetailPage />} />
+            
+            <Route path="/transactions" element={<TransactionListPage />} />
+            <Route path="/transactions/:id" element={<TransactionDetailPage />} />
+          </Route>
+          
+          {/* Rute 404 (Not Found) */}
+          <Route path="*" element={<h2>404: Halaman Tidak Ditemukan</h2>} />
+        </Routes>
+      </main>
+    </>
+  );
+}
+
+export default App;
