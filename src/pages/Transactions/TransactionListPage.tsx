@@ -13,14 +13,6 @@ const LIMIT = 5;
 const TransactionListPage: React.FC = () => {
   const navigate = useNavigate();
 
-  // Protected: kalau tidak ada token redirect ke login
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login', { replace: true });
-    }
-  }, [navigate]);
-
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -171,6 +163,7 @@ const TransactionListPage: React.FC = () => {
           value={searchBookId}
           onChange={(e) => setSearchBookId(e.target.value)}
         />
+        
         <button type="submit">Cari</button>
         <button type="button" onClick={handleClearSearch}>Clear</button>
 
@@ -187,11 +180,15 @@ const TransactionListPage: React.FC = () => {
 
       <div className="transaction-list">
         {transactions.map((tx) => (
-            <div key={tx.id} className="transaction-card">
-            <p><strong>ID Transaksi:</strong> {tx.id}</p>
-            <p><strong>Jumlah Item:</strong> {tx.total_quantity || 0}</p>
-            <p><strong>Total Harga:</strong> Rp {(tx.total_price || 0).toLocaleString()}</p>
-            <Link to={`/transactions/${tx.id}`}>Lihat Detail</Link>
+            <div key={tx.id} className="transaction-item">
+            <div className="transaction-info">
+                <p className="transaction-id">ID Transaksi: {tx.id}</p>
+                <p>Jumlah Item: {tx.total_quantity || 0}</p>
+                <p className="transaction-price">Total Harga: Rp {(tx.total_price || 0).toLocaleString()}</p>
+            </div>
+            <div className="transaction-link">
+                <Link to={`/transactions/${tx.id}`}>Lihat Detail</Link>
+            </div>
           </div>
         ))}
       </div>

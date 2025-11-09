@@ -9,14 +9,6 @@ const TransactionDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  // Protected: cek token
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login', { replace: true });
-    }
-  }, [navigate]);
-
   const [transaction, setTransaction] = useState<TransactionDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -63,27 +55,28 @@ const TransactionDetailPage: React.FC = () => {
   if (!transaction) return <p>Tidak ada data transaksi.</p>;
 
   return (
-      <div className="transaction-detail-container">
+      <div className="transaction-container">
         <div className="transaction-detail-header">
           <h2>Detail Transaksi</h2>
-        </div>
+        <p><strong>ID Transaksi:</strong> {transaction.id}</p>
+              <h3 className="total-price">Total Belanja: Rp {(transaction.total_price || 0).toLocaleString()}</h3>
+              <p><strong>Total Item:</strong> {transaction.total_quantity || 0}</p>
+        </div>
 
-        <div className="transaction-summary">
-          <p><strong>ID Transaksi:</strong> {transaction.id}</p>
-          <h3>Total Belanja: Rp {(transaction.total_price || 0).toLocaleString()}</h3>
-          <p><strong>Total Item:</strong> {transaction.total_quantity || 0}</p>
-        </div>
-
-        <div className="transaction-detail-content">
+        <div className="transaction-items-list">
           <h3>Item yang Dibeli:</h3>
           <div className="item-list">
         {transaction.items && transaction.items.length > 0 ? (
           transaction.items.map((item) => (
-              <div key={item.book_id} className="item-card">
-              <p><strong>Buku:</strong> {item.book_title}</p>
-              <p><strong>Jumlah:</strong> {item.quantity}</p>
-              <p><strong>Subtotal:</strong> Rp {(item.subtotal_price || 0).toLocaleString()}</p>
-            </div>
+              <div key={item.book_id} className="transaction-detail-item">
+                  <div className="detail-item-info">
+                      <p className="item-title">{item.book_title}</p>
+                      <p className="item-quantity">Jumlah: {item.quantity}</p>
+                  </div>
+                  <div className="detail-item-subtotal">
+                      Rp {(item.subtotal_price || 0).toLocaleString()}
+                  </div>
+                </div>
           ))
         ) : (
             <p className="empty-state">Item tidak tersedia.</p>

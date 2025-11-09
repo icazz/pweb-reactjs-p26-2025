@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 
 // Import Pages (Publik)
-import HomePage from './pages/HomePage';
+// import HomePage from './pages/HomePage';
 import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 
@@ -32,19 +32,21 @@ function App() {
       <main className="container"> {/* Pastikan class .container ada di index.css */}
         <Routes>
           {/* Rute Publik */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<BookListPage />} />
+          <Route path="/books" element={<BookListPage />} />
+          <Route path="/books/:id" element={<BookDetailPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
           {/* Rute Terproteksi */}
           <Route element={<ProtectedRoute />}>
             
-            <Route path="/books" element={<BookListPage />} />
+            {/* <Route path="/books" element={<BookListPage />} /> */}
+            <Route path="/admin/books" element={<ManageBooksPage />} />
             <Route path="/books/add" element={<AddBookPage />} />
+            <Route path="/books/edit/:id" element={<EditBookPage />} />
             <Route path="/books/:id" element={<BookDetailPage />} />
             <Route path="/genres" element={<ManageGenresPage />} />
-            <Route path="/books/edit/:id" element={<EditBookPage />} />
-            <Route path="/admin/books" element={<ManageBooksPage />} />
             
             <Route path="/transactions" element={<TransactionListPage />} />
             <Route path="/transactions/checkout" element={<CheckoutPage />} />

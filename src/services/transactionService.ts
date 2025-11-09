@@ -1,5 +1,5 @@
 import api from './api';
-import type { Transaction, TransactionDetail, CheckoutItem } from '../types/transaction.types';
+import type { Transaction, TransactionDetail, CheckoutItem, PaginatedResponse } from '../types/transaction.types';
 
 // Tipe untuk parameter query [cite: 37]
 export type TransactionQueryParams = {
@@ -24,31 +24,15 @@ type PaginatedResponse<T> = {
 
 // Mengambil rimayat transaksi (milik user)
 export const getAllTransactionsService = async (params: TransactionQueryParams): Promise<PaginatedResponse<Transaction>> => {
-  // backend expects params: page, limit, search, sortBy, order
-  const response = await api.get('/transactions', { params });
-  if (response.data.success) {
-    const respData = response.data.data || [];
-    const meta = response.data.meta || { total: 0, page: 1, limit: params.limit || 10 };
-
-    // Normalize each order to frontend Transaction shape
-    const normalized: Transaction[] = respData.map((o: any) => ({
-      id: o.id,
-      total_quantity: o.totalItems ?? o.total_items ?? o.totalItems ?? 0,
-      total_price: o.totalPrice ?? o.total_price ?? o.total_price ?? 0,
-    }));
-
-    return {
-      data: normalized,
-      meta: {
-        page: meta.page,
-        limit: meta.limit,
-        total: meta.total || 0,
-        totalPages: meta.totalPages ?? Math.ceil((meta.total || 0) / (meta.limit || 1)),
-      }
-    };
-  } else {
-    throw new Error(response.data.message || 'Gagal mengambil data transaksi');
-  }
+  const response = await api.get('/transactions', { params });
+  if (response.data.success) {
+    return {
+      data: response.data.data,
+      meta: response.data.meta
+    };
+  } else {
+    throw new Error(response.data.message || 'Gagal mengambil data transaksi');
+  }
 };
 
 // Mengambil satu transaksi berdasarkan

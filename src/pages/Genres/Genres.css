@@ -2,17 +2,21 @@
 
 .genre-manage-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2rem auto; /* Beri jarak dari navbar */
   padding: 2rem;
-  background-color: #fff;
+  
+  /* --- REVISI TEMA --- */
+  background-color: #1F2937; /* Latar kartu gelap */
+  border: 1px solid #374151; /* Border gelap */
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .genre-manage-container h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
   text-align: center;
+  color: #FFFFFF; /* Teks putih */
 }
 
 /* Form Styling (Add & Edit) */
@@ -25,24 +29,39 @@
 .genre-form input[type="text"] {
   flex-grow: 1;
   padding: 0.75rem;
-  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
+  
+  /* --- REVISI TEMA --- */
+  border: 1px solid #374151; /* Border gelap */
+  background-color: #111827; /* Latar input lebih gelap */
+  color: #f9f9f9; /* Teks input putih */
 }
 
+.genre-form input[type="text"]:focus {
+  outline: none;
+  border-color: #6A11CB; /* Border ungu saat fokus */
+  box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.3);
+}
+
+/* Tombol (Biru/Ungu) */
 .genre-form button {
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
   font-weight: bold;
+  
+  /* --- REVISI TEMA --- */
+  background: linear-gradient(to right, #6A11CB, #2575FC);
+  color: white;
+  transition: all 0.2s;
 }
 
 .genre-form button:hover {
-  background-color: #0056b3;
+  opacity: 0.9;
+  box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
 }
 
 /* List Styling */
@@ -57,13 +76,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border: 1px solid #ddd;
+  
+  /* --- REVISI TEMA --- */
+  border: 1px solid #374151; /* Border gelap */
+  background-color: #374151; /* Latar item (sedikit lebih terang) */
   border-radius: 5px;
 }
 
 .genre-name {
   font-size: 1.1rem;
   font-weight: 500;
+  color: #FFFFFF; /* Teks putih */
 }
 
 .genre-actions {
@@ -71,6 +94,7 @@
   gap: 0.5rem;
 }
 
+/* Style tombol (Biarkan warna kuning & merah untuk aksi) */
 .genre-actions button {
   padding: 0.5rem 0.75rem;
   border: none;
@@ -93,9 +117,10 @@
 
 /* Style untuk error state */
 .error-state {
-  color: #d9534f;
-  background-color: #f2dede;
-  border: 1px solid #ebccd1;
+  /* --- REVISI TEMA --- */
+  color: #F87171; /* Merah muda */
+  background-color: #371A1A; /* Background merah gelap */
+  border: 1px solid #7F1D1D; /* Border merah */
   border-radius: 5px;
   padding: 1rem;
   margin-bottom: 1.5rem;
