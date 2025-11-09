@@ -12,6 +12,32 @@ type BookQueryParams = {
   condition?: string; // Sesuai PDF [cite: 30]
 };
 
+// Fungsi untuk genre
+export const createGenreService = async (name: string): Promise<Genre> => {
+  const response = await api.post('/genre', { name });
+  if (response.data.success) {
+    return response.data.data;
+  } else {
+    throw new Error(response.data.message || 'Gagal membuat genre');
+  }
+};
+
+export const updateGenreService = async (id: string, name: string): Promise<Genre> => {
+  const response = await api.patch(`/genre/${id}`, { name });
+  if (response.data.success) {
+    return response.data.data;
+  } else {
+    throw new Error(response.data.message || 'Gagal mengedit genre');
+  }
+};
+
+export const deleteGenreService = async (id: string): Promise<void> => {
+  const response = await api.delete(`/genre/${id}`);
+  if (!response.data.success) {
+    throw new Error(response.data.message || 'Gagal menghapus genre');
+  }
+};
+
 // Mengambil semua buku dengan parameter query
 export const getAllBooksService = async (params: BookQueryParams): Promise<PaginatedResponse<Book>> => {
   const response = await api.get('/books', { params });
@@ -50,8 +76,8 @@ export const getBookByIdService = async (id: string): Promise<Book> => {
 };
 
 // Membuat buku baru
-export const createBookService = async (bookData: NewBookData): Promise<any> => {
-  const response = await api.post('/books', bookData);
+export const createBookService = async (formData: FormData): Promise<any> => {
+  const response = await api.post('/books', formData);
   if (response.data.success) {
     return response.data.data;
   } else {
@@ -61,8 +87,8 @@ export const createBookService = async (bookData: NewBookData): Promise<any> => 
 
 // *** 3. FUNGSI BARU (Update Book) ***
 // Sesuai requirement PATCH /books/:book_id 
-export const updateBookService = async (id: string, bookData: UpdateBookData): Promise<any> => {
-  const response = await api.patch(`/books/${id}`, bookData);
+export const updateBookService = async (id: string, formData: FormData): Promise<any> => {
+  const response = await api.patch(`/books/${id}`, formData);
   if (response.data.success) {
     return response.data.data;
   } else {

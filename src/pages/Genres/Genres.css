@@ -1,0 +1,103 @@
+/* src/pages/Genres/Genres.css */
+
+.genre-manage-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.genre-manage-container h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Form Styling (Add & Edit) */
+.genre-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.genre-form input[type="text"] {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.genre-form button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.genre-form button:hover {
+  background-color: #0056b3;
+}
+
+/* List Styling */
+.genre-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.genre-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.genre-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.genre-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.genre-actions button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-btn, .save-btn {
+  background-color: #ffc107; /* Kuning */
+  color: #333;
+}
+.delete-btn, .cancel-btn {
+  background-color: #d9534f; /* Merah */
+  color: white;
+}
+.cancel-btn {
+  background-color: #6c757d; /* Abu-abu */
+}
+
+/* Style untuk error state */
+.error-state {
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
