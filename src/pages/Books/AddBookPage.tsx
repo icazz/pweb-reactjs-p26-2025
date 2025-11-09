@@ -1,100 +1,118 @@
+// src/pages/Books/AddBookPage.tsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createBookService, getGenresService } from '../../services/bookService';
-import type { Genre, NewBookData } from '../../types/book.types';
+import type { Genre } from '../../types/book.types'; // Hapus NewBookData, kita pakai FormData
 import './Books.css'; 
 
 const AddBookPage: React.FC = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const [title, setTitle] = useState('');
-  const [writer, setWriter] = useState('');
-  const [publisher, setPublisher] = useState('');
-  const [publicationYear, setPublicationYear] = useState(new Date().getFullYear());
-  const [price, setPrice] = useState(0);
-  const [stock, setStock] = useState(1);
+  // State untuk form teks
+  const [title, setTitle] = useState('');
+  const [writer, setWriter] = useState('');
+  const [publisher, setPublisher] = useState('');
+  
+  // State untuk form angka (disimpan sebagai string untuk perbaikan bug)
+  const [publicationYear, setPublicationYear] = useState<string>(String(new Date().getFullYear()));
+  const [price, setPrice] = useState<string>('');
+  const [stock, setStock] = useState<string>('');
+  
   const [genreId, setGenreId] = useState('');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState('');
+  
+  // State untuk file gambar
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // State untuk UI
+  const [genres, setGenres] = useState<Genre[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const currentYear = new Date().getFullYear();
 
-  useEffect(() => {
-    const fetchGenres = async () => {
-      try {
-        const response = await getGenresService();
-        setGenres(response.data);
-      } catch (err: any) {
-        setError('Gagal memuat genre. Coba refresh halaman.');
-      }
-    };
-    fetchGenres();
-  }, []);
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await getGenresService();
+        setGenres(response.data);
+      } catch (err: any) {
+        setError('Gagal memuat genre. Coba refresh halaman.');
+      }
+    };
+    fetchGenres();
+  }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+  // Fungsi handleSubmit yang sudah diperbaiki
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    const currentYear = new Date().getFullYear();
+    // --- 1. VALIDASI DULU ---
+    if (!title || !writer || !publisher || !genreId || !publicationYear || !price || !stock) {
+      setError('Field dengan tanda * wajib diisi.');
+      setLoading(false);
+      return;
+    }
 
-    // Validasi field wajib
-    if (!title || !writer || !publisher || !genreId) {
-      setError('Field dengan tanda * wajib diisi.');
-      setLoading(false);
-      return;
-    }
+    // Ganti koma (,) dengan titik (.) agar JavaScript paham
+    const priceString = price.replace(',', '.');
+    const stockString = stock.replace(',', '.');
+    const yearString = publicationYear.replace(',', '.');
 
-    // Validasi numerik
-    if (price <= 0) {
-      setError('Harga harus lebih dari 0 dan tidak boleh minus.');
-      setLoading(false);
-      return;
-    }
+    const numPrice = parseFloat(priceString); // Boleh desimal
+    const numStock = parseInt(stockString, 10); // Harus integer
+    const numYear = parseInt(yearString, 10); // Harus integer
 
-    if (stock < 0) {
-      setError('Stok tidak boleh bernilai negatif.');
-      setLoading(false);
-      return;
-    }
+    // Validasi numerik
+    if (numPrice <= 0) {
+      setError('Harga tidak boleh 0 atau minus.');
+      setLoading(false);
+      return;
+    }
+    if (numStock <= 0 || parseFloat(stockString) !== numStock) {
+      setError('Stok harus bilangan bulat positif (tidak boleh 0, minus, atau desimal).');
+      setLoading(false);
+      return;
+    }
+    if (numYear <= 0 || parseFloat(yearString) !== numYear) {
+      setError('Tahun terbit harus bilangan bulat positif.');
+      setLoading(false);
+      return;
+    }
+    if (numYear > currentYear) {
+      setError('Tahun terbit tidak boleh lebih dari tahun sekarang.');
+      setLoading(false);
+      return;
+    }
+    // --- AKHIR VALIDASI ---
 
-    // ✅ Stok tidak boleh bilangan desimal
-    if (!Number.isInteger(stock)) {
-      setError('Stok harus berupa bilangan bulat (tanpa koma).');
-      setLoading(false);
-      return;
-    }
+    // --- 2. BUAT FORMDATA SETELAH VALIDASI ---
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('writer', writer);
+    formData.append('publisher', publisher);
+    formData.append('publicationYear', yearString); // Kirim string yang sudah divalidasi
+    formData.append('price', priceString); // Kirim string yang sudah divalidasi
+    formData.append('stockQuantity', stockString); // Kirim string yang sudah divalidasi
+    formData.append('genreId', genreId);
+    formData.append('description', description);
 
-    // ✅ Tahun tidak boleh melebihi tahun sekarang
-    if (publicationYear > currentYear) {
-      setError('Tahun terbit tidak boleh lebih dari tahun sekarang.');
-      setLoading(false);
-      return;
-    }
-
-const newBookData: NewBookData = {
-  title,
-  writer,
-  publisher,
-  publicationYear: Number(publicationYear),
-  price: Number(price),
-  stockQuantity: Number(stock),
-  genreId: genreId,
-  description: description || undefined,
-};
-
-
-    try {
-      await createBookService(newBookData);
-      setLoading(false);
-      alert('Buku berhasil ditambahkan!');
-      navigate('/books');
-    } catch (err: any) {
-      setLoading(false);
-      setError(err.response?.data?.message || err.message || 'Gagal menambahkan buku');
-    }
-  };
+    if (imageFile) {
+      formData.append('book_image', imageFile);
+    }
+    
+    try {
+      // --- 3. KIRIM FORMDATA ---
+      await createBookService(formData); 
+      setLoading(false);
+      alert('Buku berhasil ditambahkan!');
+      navigate('/books');
+    } catch (err: any) {
+      setLoading(false);
+      setError(err.response?.data?.message || err.message || 'Gagal menambahkan buku');
+    }
+  };
 
   return (
     <div className="book-form-container">
@@ -138,10 +156,23 @@ const newBookData: NewBookData = {
           <label htmlFor="publicationYear">Tahun Terbit *</label>
           <input
             id="publicationYear"
-            type="number"
+            type="number" // Tetap type="number" untuk UI (panah)
+            step="1"
+            max={currentYear}
+            min="1800"
+            placeholder="Contoh: 2025"
             value={publicationYear}
-            onChange={(e) => setPublicationYear(Number(e.target.value))}
+            onChange={(e) => {
+              // Hapus semua karakter non-angka (termasuk -, +, e, E, .)
+              const value = e.target.value.replace(/[^0-9]/g, '');
+              setPublicationYear(value);
+            }}
             required
+            onKeyDown={(e) => {
+              if (e.key === '-') {
+                e.preventDefault();
+              }
+            }}
           />
         </div>
 
@@ -151,9 +182,16 @@ const newBookData: NewBookData = {
             id="price"
             type="number"
             min="0"
+            step="1000"
+            placeholder="Contoh: 50000"
             value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(e) => setPrice(e.target.value)}
             required
+            onKeyDown={(e) => {
+              if (e.key === '-') {
+                e.preventDefault();
+              }
+            }}
           />
         </div>
 
@@ -164,11 +202,33 @@ const newBookData: NewBookData = {
             type="number"
             min="0"
             step="1"
+            placeholder="Contoh: 10"
             value={stock}
-            onChange={(e) => setStock(Number(e.target.value))}
+            onChange={(e) => setStock(e.target.value)}
             required
+            onKeyDown={(e) => {
+              if (e.key === '-' || e.key === '.' || e.key === ',') {
+                e.preventDefault();
+              }
+            }}
           />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="image">Gambar Buku (Opsional)</label>
+          <input
+            id="image"
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setImageFile(e.target.files[0]);
+              } else {
+                setImageFile(null);
+              }
+            }}
+          />
+        </div>
 
         <div className="form-group">
           <label htmlFor="description">Deskripsi</label>

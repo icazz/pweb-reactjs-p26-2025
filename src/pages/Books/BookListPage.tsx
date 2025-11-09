@@ -1,7 +1,7 @@
 // src/pages/Books/BookListPage.tsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllBooksService, deleteBookService } from '../../services/bookService';
+import { getAllBooksService } from '../../services/bookService';
 // Pastikan 'Genre' juga di-import
 import type { Book, Genre, PaginatedResponse } from '../../types/book.types';
 import './Books.css'; // Import CSS
@@ -51,18 +51,6 @@ const BookListPage: React.FC = () => {
     fetchBooks();
   }, [currentPage, search, orderByTitle, orderByPublishDate]);
 
-  // ... (Fungsi handleDeleteBook Anda sudah benar) ...
-  const handleDeleteBook = async (id: string) => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus buku ini?')) {
-      try {
-        await deleteBookService(id);
-        fetchBooks(); 
-      } catch (err: any) {
-        setError(err.message || 'Gagal menghapus buku');
-      }
-    }
-  };
-
   // ... (Render loading/error Anda sudah benar) ...
   if (loading) return <div className="loading-state">Loading buku...</div>;
   if (error) return <div className="error-state">Error: {error}</div>;
@@ -72,7 +60,10 @@ const BookListPage: React.FC = () => {
       {/* ... (Header dan filter Anda sudah benar) ... */}
       <div className="book-list-header">
         <h2>Daftar Buku</h2>
-        <Link to="/books/add" className="add-book-link">Tambah Buku</Link>
+        <div className="header-actions">
+          <Link to="/genres" className="manage-genre-link">Kelola Genre</Link>
+          <Link to="/admin/books" className="add-book-link">Kelola Buku</Link>
+        </div>
       </div>
       <div className="filters-container">
         <input type="text" placeholder="Cari judul atau penulis..." value={search} onChange={(e) => setSearch(e.target.value)} />
@@ -95,13 +86,26 @@ const BookListPage: React.FC = () => {
           <div className="book-grid">
             {books.map((book) => (
               <div key={book.id} className="book-card">
+                {book.book_image ? (
+                  <img 
+                    // Arahkan ke URL backend Anda
+                    src={`http://localhost:8080${book.book_image}`} 
+                    alt={book.title} 
+                    className="book-card-image"
+                  />
+                ) : (
+                  // Placeholder jika tidak ada gambar
+                  <div className="book-card-image-placeholder">
+                    <span>No Image</span>
+                  </div>
+                )}
                 <div className="book-card-content">
                   <h3>{book.title}</h3>
                   <p>oleh {book.writer}</p>
                   <p className="book-price">
                     Rp {book.price.toLocaleString('id-ID')}
                   </p>
-                  <p>Stok: {book.stock_quantity}</p>
+                  <p>Stok: {book.stockQuantity}</p>
                   
                   {/* --- REVISI KUNCI DI SINI --- */}
                   <p>Genre: {book.genre.name}</p> 
@@ -111,7 +115,6 @@ const BookListPage: React.FC = () => {
                 <div className="book-card-actions">
                   {/* ... (Tombol Anda sudah benar) ... */}
                   <Link to={`/books/${book.id}`} className="view-details-link">Lihat Detail</Link>
-                  <button onClick={() => handleDeleteBook(book.id)} className="delete-book-btn">Hapus</button>
                 </div>
               </div>
             ))}

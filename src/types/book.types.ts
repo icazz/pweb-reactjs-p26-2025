@@ -9,10 +9,11 @@ export interface Book {
   writer: string;
   publisher: string;
   description: string;
-  publication_year: number;
   price: number;
-  stock_quantity: number;
-  genre: Genre; // API mengembalikan genre sebagai STRING, bukan objek
+  genre: Genre;
+  book_image?: string | null;
+  stockQuantity: number;
+  publicationYear: number;
 }
 
 export interface NewBookData {
