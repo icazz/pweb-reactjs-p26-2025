@@ -9,14 +9,17 @@ import LoginPage from './pages/Auth/LoginPage';
 import RegisterPage from './pages/Auth/RegisterPage';
 
 // Import Pages (Protected)
+import ManageGenresPage from './pages/Genres/ManageGenresPage';
 import BookListPage from './pages/Books/BookListPage';
 import BookDetailPage from './pages/Books/BookDetailPage';
 import AddBookPage from './pages/Books/AddBookPage';
-import TransactionListPage from './pages/Transactions/TransactionListPage';
-import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
+// import TransactionListPage from './pages/Transactions/TransactionListPage';
+// import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
 
 // Import Route Protector
 import ProtectedRoute from './routes/ProtectedRoute';
+import EditBookPage from './pages/Books/EditBookPage';
+import ManageBooksPage from './pages/Books/ManageBooksPage';
 
 function App() {
   return (
@@ -34,12 +37,16 @@ function App() {
           
           {/* Rute Terproteksi */}
           <Route element={<ProtectedRoute />}>
+            
             <Route path="/books" element={<BookListPage />} />
             <Route path="/books/add" element={<AddBookPage />} />
             <Route path="/books/:id" element={<BookDetailPage />} />
+            <Route path="/genres" element={<ManageGenresPage />} />
+            <Route path="/books/edit/:id" element={<EditBookPage />} />
+            <Route path="/admin/books" element={<ManageBooksPage />} />
             
-            <Route path="/transactions" element={<TransactionListPage />} />
-            <Route path="/transactions/:id" element={<TransactionDetailPage />} />
+            {/* <Route path="/transactions" element={<TransactionListPage />} />
+            <Route path="/transactions/:id" element={<TransactionDetailPage />} /> */}
           </Route>
           
           {/* Rute 404 (Not Found) */}
