@@ -81,6 +81,7 @@ const ManageBooksPage: React.FC = () => {
         <h2>Kelola Buku</h2> 
         <div className="header-actions">
           <Link to="/genres" className="manage-genre-link">Kelola Genre</Link>
+          <Link to="/books/add" className="add-book-link">Tambah Buku</Link>
         </div>
       </div>
 
