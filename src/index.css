@@ -10,8 +10,10 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f4f4f4;
-  color: #333;
+  
+  /* --- REVISI TEMA --- */
+  background-color: #111827; /* Latar belakang dark-blue (gelap) */
+  color: #f9f9f9; /* Teks default putih */
 }
 
 /* Helper class untuk konten di App.tsx */

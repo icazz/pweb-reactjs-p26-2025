@@ -5,31 +5,35 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* 'container' class from index.css handles max-width */
-  /* We add padding, background, etc. */
+  
+  /* REVISI: Hapus background putih dan shadow */
   padding: 4rem 2rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  margin-top: 2rem; /* Jarak dari Navbar */
+  /* background-color: #ffffff; */ /* <- Dihapus */
+  /* border-radius: 8px; */ /* <- Dihapus */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); */ /* <- Dihapus */
+  margin-top: 2rem; 
 }
 
 .home-header h1 {
   font-size: 2.5rem;
-  color: #222;
+  color: #FFFFFF; /* Teks putih */
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
 .home-subtitle {
   font-size: 1.25rem;
-  color: #555;
+  color: #D1D5DB; /* Teks abu-abu muda */
   margin-bottom: 2.5rem;
   font-weight: 300;
 }
 
 .home-content p {
   font-size: 1.1rem;
-  color: #444;
+  color: #9CA3AF; /* Teks abu-abu lebih redup */
   margin-bottom: 1.5rem;
 }
 
@@ -38,6 +42,8 @@
   gap: 1rem;
   justify-content: center;
 }
+
+/* --- REVISI TEMA TOMBOL --- */
 
 .home-button {
   display: inline-block;
@@ -51,28 +57,23 @@
   border: none;
 }
 
-/* Tombol utama (biru) */
+/* Tombol utama (biru/ungu) */
 .home-button {
-  background-color: #007bff;
+  /* Gradient Biru/Ungu dari referensi */
+  background: linear-gradient(to right, #6A11CB, #2575FC);
   color: white;
 }
-
 .home-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px); /* Efek sedikit terangkat */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  opacity: 0.9;
+  box-shadow: 0 4px 15px rgba(106, 17, 203, 0.4);
 }
 
-/* Tombol sekunder (putih) */
+/* Tombol sekunder (abu-abu gelap) */
 .home-button.secondary {
-  background-color: #f8f9fa;
-  color: #333;
-  border: 1px solid #ccc;
+  background-color: #374151;
+  color: #f9f9f9;
 }
-
 .home-button.secondary:hover {
-  background-color: #e2e6ea;
-  border-color: #bbb;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #4B5563;
+  box-shadow: none; /* Hapus shadow ungu */
 }

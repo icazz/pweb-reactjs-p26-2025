@@ -5,47 +5,41 @@ import { useAuth } from '../../contexts/AuthContext';
 import './Navbar.css'; 
 
 const Navbar: React.FC = () => {
-  const { user, token, logoutAction } = useAuth();
-  const navigate = useNavigate();
+  const { user, token, logoutAction } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logoutAction();
-    navigate('/login'); // Arahkan ke login setelah logout
-  };
+  const handleLogout = () => {
+    logoutAction();
+    navigate('/login'); 
+  };
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        {/* Link ke /books jika sudah login, ke / jika belum */}
-        <Link to={token ? "/books" : "/"}>IT Literature Shop</Link>
-      </div>
-      <div className="navbar-links">
-        {token ? (
-          <>
-            {/* Tampil jika SUDAH login */}
-            <Link to="/books">Buku</Link>
-            <Link to="/transactions">Transaksi</Link>
-            
-            {/* Tampilkan email user (Requirement) */}
-            <span className="navbar-user">
-              {user?.username || user?.email} {/* Tampilkan username, atau email jika username tidak ada */}
-            </span>
-            
-            {/* Tombol Logout (Requirement) */}
-            <button onClick={handleLogout} className="navbar-logout-btn">
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            {/* Tampil jika BELUM login */}
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </>
-        )}
-      </div>
-    </nav>
-  );
+  return (
+    <nav className="navbar">
+      <div className="navbar-brand">
+        {/* --- REVISI DI SINI --- */}
+        {/* Link ini sekarang selalu ke homepage (katalog) */}
+        <Link to="/">IT Literature Shop</Link>
+      </div>
+      <div className="navbar-links">
+        {token ? (
+          <>
+            {/* "Buku" sekarang merujuk ke halaman Katalog (sama seperti logo) */}
+            <Link to="/books">Buku</Link> 
+            <Link to="/transactions">Transaksi</Link>
+            <span className="navbar-user">{user?.email}</span>
+            <button onClick={handleLogout} className="navbar-logout-btn">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="navbar-button navbar-button-secondary">Login</Link>
+            <Link to="/register" className="navbar-button navbar-button-secondary">Register</Link>
+          </>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;

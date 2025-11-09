@@ -1,9 +1,17 @@
 .transaction-container {
   padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  /* ensure content can grow and page can scroll on small screens */
-  min-height: calc(100vh - 120px);
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: #1F2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.transaction-container h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #FFFFFF;
 }
 
 .transaction-header {
@@ -13,11 +21,6 @@
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
   gap: 1rem;
-}
-
-.transaction-header h2 {
-  margin: 0;
-  color: #333;
 }
 
 .transaction-filters {
@@ -31,134 +34,168 @@
 .transaction-filters select,
 .transaction-filters button {
   padding: 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid #374151;
   border-radius: 5px;
   font-size: 1rem;
-}
-
-/* Form element styling for checkout */
-.transaction-detail-container select,
-.transaction-detail-container input,
-.transaction-detail-container button {
-  font-family: inherit;
-}
-
-.transaction-detail-container select {
-  padding: 0.5rem;
-  border-radius: 5px;
-}
-
-.item-card select {
-  min-width: 220px;
+  background-color: #1F2937;
+  color: #f9f9f9;
 }
 
 .transaction-filters button {
-  background-color: #007bff;
+  background: linear-gradient(to right, #6A11CB, #2575FC);
   color: white;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
 }
 
 .transaction-filters button:hover {
-  background-color: #0056b3;
+  opacity: 0.9;
 }
 
 .transaction-filters button[type="button"] {
-  background-color: #6c757d;
+  background-color: #374151;
 }
 
 .transaction-filters button[type="button"]:hover {
-  background-color: #5a6268;
+  background-color: #4B5563;
 }
 
 .transaction-list {
-  display: grid;
+  display: flex;
   gap: 1rem;
+  flex-direction: column;
 }
 
-.transaction-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #374151;
+  border-radius: 5px;
+  border: 1px solid #4B5563;
+  transition: background-color 0.2s;
+}
+.transaction-item:hover {
+  background-color: #4B5563;
 }
 
-.transaction-card p {
-  margin: 0.5rem 0;
-  color: #555;
+.transaction-info {
+  flex-grow: 1;
+  min-width: 0;
 }
-
-.transaction-card strong {
-  color: #333;
+.transaction-info p {
+  margin: 0;
+  color: #D1D5DB;
+  font-size: 0.9rem;
 }
-
-.transaction-card a {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: #007bff;
-  text-decoration: none;
+.transaction-info .transaction-id {
   font-weight: bold;
+  font-size: 1.1rem;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+.transaction-info .transaction-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #60A5FA; /* Biru muda */
 }
 
-.transaction-card a:hover {
-  text-decoration: underline;
+.transaction-link a {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: #111827;
+  color: #60A5FA;
+  border: 1px solid #374151;
+  transition: all 0.2s;
 }
-
-/* Detail Transaction Styling */
-.transaction-detail-container {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  max-width: 800px;
-  margin: 0 auto;
+.transaction-link a:hover {
+  background-color: #374151;
 }
 
 .transaction-detail-header {
-  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #374151;
 }
 
-.transaction-detail-header h2 {
-  margin: 0 0 1rem 0;
-  color: #333;
+.transaction-detail-header p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #D1D5DB;
 }
 
-.transaction-summary {
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 2rem;
+.transaction-detail-header .total-price {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #60A5FA;
 }
 
-.item-list {
-  display: grid;
+.transaction-items-list {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+  margin-top: 1.5rem;
+}
+.transaction-items-list h3 {
+  color: #FFFFFF;
+  margin-bottom: 0;
 }
 
-.item-card {
-  background-color: #fff;
-  border: 1px solid #eee;
+.transaction-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
-  border-radius: 6px;
+  background-color: #374151;
+  border-radius: 5px;
+}
+.detail-item-info { flex-grow: 1; }
+.detail-item-info p { margin: 0; }
+.detail-item-info .item-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+.detail-item-info .item-quantity {
+  color: #D1D5DB;
+  font-size: 0.9rem;
+}
+.detail-item-subtotal {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  flex-shrink: 0;
+  margin-left: 1rem;
 }
 
-/* Loading, Error, and Empty States */
 .loading-state,
-.error-state,
 .empty-state {
   text-align: center;
   padding: 3rem;
   font-size: 1.2rem;
-  color: #555;
+  color: #9CA3AF;
 }
-
+.empty-state {
+  background-color: #1F2937;
+  border: 1px dashed #374151;
+  border-radius: 8px;
+}
 .error-state {
-  color: #d9534f;
-  background-color: #f2dede;
-  border: 1px solid #ebccd1;
+  color: #F87171;
+  background-color: #371A1A;
+  border: 1px solid #7F1D1D;
   border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 /* Pagination */
@@ -172,21 +209,67 @@
 
 .pagination-container button {
   padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: 1px solid #374151;
+  background-color: #1F2937;
+  color: #f9f9f9;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .pagination-container button:disabled {
-  background-color: #f4f4f4;
+  background-color: #111827;
+  color: #4B5563;
   cursor: not-allowed;
-  color: #aaa;
 }
 
 .pagination-container span {
   padding: 0.5rem 1rem;
   font-weight: bold;
+}
+
+/* --- Halaman Checkout --- */
+.checkout-form {
+  border-top: 1px solid #374151;
+  padding-top: 2rem;
+}
+
+.checkout-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkout-item-card {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.checkout-select {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #374151;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #1F2937;
+  color: #f9f9f9;
+}
+
+.checkout-quantity {
+  width: 100px;
+  padding: 0.75rem;
+  border: 1px solid #374151;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #111827;
+  color: #f9f9f9;
+}
+
+.checkout-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
 }
 
 /* Responsive Design */
@@ -202,10 +285,6 @@
   .transaction-filters input,
   .transaction-filters select {
     width: 100%;
-  }
-
-  .transaction-card {
-    padding: 0.75rem;
   }
 }
 

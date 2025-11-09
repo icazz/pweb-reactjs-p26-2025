@@ -1,8 +1,9 @@
 // src/pages/Books/BookDetailPage.tsx
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getBookByIdService } from '../../services/bookService';
 import type { Book, Genre } from '../../types/book.types'; // Pastikan tipe Anda menyertakan 'book_image'
+import { useAuth } from '../../contexts/AuthContext'; // 2. IMPORT useAuth
 import './Books.css';
 
 const BookDetailPage: React.FC = () => {
@@ -10,6 +11,8 @@ const BookDetailPage: React.FC = () => {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const { token } = useAuth();
 
   useEffect(() => {
     if (!id) return; 
@@ -95,13 +98,21 @@ const BookDetailPage: React.FC = () => {
       </div>
       {/* --- AKHIR REVISI 2 --- */}
 
-      <button
-        className="form-button"
-        style={{ marginTop: '2rem', width: '100%' }}
-        disabled={book.stockQuantity === 0}
-      >
-        {book.stockQuantity > 0 ? 'Beli Sekarang' : 'Stok Habis'}
-      </button>
+      {token ? (
+        // Jika user SUDAH login: Tampilkan tombol Beli
+        <button
+            className="form-button"
+            style={{ marginTop: '2rem', width: '100%' }}
+            disabled={book.stockQuantity === 0}
+          >
+            {book.stockQuantity > 0 ? 'Beli Sekarang' : 'Stok Habis'}
+          </button>
+      ) : (
+        // Jika user BELUM login: Tampilkan tombol Link ke Login
+        <div className="login-prompt-button">
+          <Link to="/login">Login untuk Membeli</Link>
+        </div>
+      )}
     </div>
   );
 };

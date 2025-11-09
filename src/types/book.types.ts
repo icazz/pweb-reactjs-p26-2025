@@ -27,17 +27,6 @@ export interface NewBookData {
   description?: string;
 }
 
-export type PaginatedResponse<T> = {
-  data: T[];
-  meta: {
-    page: number;
-    limit: number;
-    prev_page: number | null;
-    next_page: number | null;
-    total?: number;
-  };
-};
-
 export interface UpdateBookData {
   description?: string;
   price?: number;

@@ -5,19 +5,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #333;
+  background-color: #21293c;
   color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: white;
+  text-decoration: none;
 }
 
 .navbar-brand a {
-  color: white;
+  color: #A78BFA;
   text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: bold;
 }
 
 .navbar-links {
@@ -34,7 +36,7 @@
 }
 
 .navbar-links a:hover {
-  color: #00aaff; /* Ganti dengan warna tema Anda */
+  color: #A78BFA; /* Ganti dengan warna tema Anda */
 }
 
 .navbar-user {
@@ -54,6 +56,45 @@
   transition: background-color 0.2s;
 }
 
+.navbar-logout-btn:hover {
+  background-color: #c9302c;
+}
+
+/* Style untuk link yang di-render sebagai tombol */
+.navbar-links a.navbar-button,
+.navbar-links button.navbar-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Tombol Login (Sekunder/Abu-abu) */
+.navbar-links a.navbar-button-secondary {
+  background-color: #374151;
+  color: white;
+}
+.navbar-links a.navbar-button-secondary:hover {
+  background-color: #4B5563;
+  color: white; /* Pastikan hover tetap putih */
+}
+
+/* Tombol Logout (Merah) */
+.navbar-logout-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
 .navbar-logout-btn:hover {
   background-color: #c9302c;
 }
