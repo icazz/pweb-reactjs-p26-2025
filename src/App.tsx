@@ -14,6 +14,7 @@ import BookDetailPage from './pages/Books/BookDetailPage';
 import AddBookPage from './pages/Books/AddBookPage';
 import TransactionListPage from './pages/Transactions/TransactionListPage';
 import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
+import CheckoutPage from './pages/Transactions/CheckoutPage';
 
 // Import Route Protector
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -39,6 +40,7 @@ function App() {
             <Route path="/books/:id" element={<BookDetailPage />} />
             
             <Route path="/transactions" element={<TransactionListPage />} />
+            <Route path="/transactions/checkout" element={<CheckoutPage />} />
             <Route path="/transactions/:id" element={<TransactionDetailPage />} />
           </Route>
           
