@@ -13,8 +13,9 @@ import ManageGenresPage from './pages/Genres/ManageGenresPage';
 import BookListPage from './pages/Books/BookListPage';
 import BookDetailPage from './pages/Books/BookDetailPage';
 import AddBookPage from './pages/Books/AddBookPage';
-// import TransactionListPage from './pages/Transactions/TransactionListPage';
-// import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
+import TransactionListPage from './pages/Transactions/TransactionListPage';
+import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
+import CheckoutPage from './pages/Transactions/CheckoutPage';
 
 // Import Route Protector
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -45,8 +46,9 @@ function App() {
             <Route path="/books/edit/:id" element={<EditBookPage />} />
             <Route path="/admin/books" element={<ManageBooksPage />} />
             
-            {/* <Route path="/transactions" element={<TransactionListPage />} />
-            <Route path="/transactions/:id" element={<TransactionDetailPage />} /> */}
+            <Route path="/transactions" element={<TransactionListPage />} />
+            <Route path="/transactions/checkout" element={<CheckoutPage />} />
+            <Route path="/transactions/:id" element={<TransactionDetailPage />} />
           </Route>
           
           {/* Rute 404 (Not Found) */}
