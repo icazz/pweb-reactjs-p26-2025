@@ -5,14 +5,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #21293c;
+  background-color: #1F2937; /* Latar belakang dari tema gelap */
   color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.navbar-brand {
-  color: white;
-  text-decoration: none;
+  position: relative; /* Diperlukan untuk menu mobile */
+  z-index: 100;
 }
 
 .navbar-brand a {
@@ -36,7 +33,7 @@
 }
 
 .navbar-links a:hover {
-  color: #A78BFA; /* Ganti dengan warna tema Anda */
+  color: #A78BFA;
 }
 
 .navbar-user {
@@ -45,24 +42,9 @@
   color: #ccc;
 }
 
-.navbar-logout-btn {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background-color: #d9534f; /* Merah */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.navbar-logout-btn:hover {
-  background-color: #c9302c;
-}
-
 /* Style untuk link yang di-render sebagai tombol */
 .navbar-links a.navbar-button,
-.navbar-links button.navbar-button {
+.navbar-logout-btn {
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
   font-weight: bold;
@@ -73,39 +55,28 @@
   transition: background-color 0.2s;
 }
 
-/* Tombol Login (Sekunder/Abu-abu) */
+/* Tombol Login/Register (Sekunder/Abu-abu) */
 .navbar-links a.navbar-button-secondary {
   background-color: #374151;
   color: white;
 }
 .navbar-links a.navbar-button-secondary:hover {
   background-color: #4B5563;
-  color: white; /* Pastikan hover tetap putih */
+  color: white; 
 }
 
 /* Tombol Logout (Merah) */
 .navbar-logout-btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  font-weight: bold;
   background-color: #d9534f;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
 }
 .navbar-logout-btn:hover {
   background-color: #c9302c;
 }
 
-/* src/components/layout/Navbar.css */
-/* ... (style .navbar, .navbar-links, dll. Anda) ... */
-
-/* --- TAMBAHKAN STYLE INI --- */
-
+/* Badge Keranjang */
 .navbar-cart-link {
-  position: relative; /* Diperlukan untuk positioning badge */
+  position: relative; 
   padding: 0.25rem 0.5rem;
 }
 
@@ -123,5 +94,108 @@
   justify-content: center;
   font-size: 0.75rem;
   font-weight: bold;
-  border: 2px solid #1F2937; /* Border agar menyatu dgn navbar */
+  border: 2px solid #1F2937;
+}
+
+/* --- REVISI: Tombol Hamburger (Mobile) --- */
+.navbar-toggle {
+  display: none; /* Sembunyikan di desktop */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  position: relative;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+.hamburger-bar:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+/* Animasi Tombol Hamburger menjadi 'X' */
+.navbar-toggle.active .hamburger-bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.navbar-toggle.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.navbar-toggle.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* --- REVISI: Media Query untuk Mobile (HP & Tablet) --- */
+@media (max-width: 850px) {
+  .navbar-toggle {
+    display: block; /* Tampilkan tombol hamburger */
+  }
+
+  .navbar-brand a {
+    font-size: 1.5rem; /* Perkecil judul */
+  }
+
+  .navbar-links {
+    display: flex; /* Ubah dari 'none' ke 'flex' agar transisi berfungsi */
+    opacity: 0; /* Sembunyikan */
+    visibility: hidden; /* Sembunyikan */
+    transform: translateY(-10px); /* Efek 'jatuh' */
+    transition: all 0.3s ease-in-out;
+    
+    position: absolute;
+    top: 100%; /* Tepat di bawah navbar */
+    left: 0;
+    width: 100%;
+    background-color: #1F2937; /* Latar belakang menu */
+    flex-direction: column; /* Susun link secara vertikal */
+    padding: 1rem 0;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    gap: 0; /* Hapus gap horizontal */
+  }
+
+  .navbar-links.active {
+    opacity: 1; /* Tampilkan menu saat 'active' */
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Style setiap item di menu mobile */
+  .navbar-links a,
+  .navbar-links .navbar-user,
+  .navbar-links .navbar-logout-btn {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #374151; /* Garis pemisah */
+  }
+  
+  .navbar-links a:last-child,
+  .navbar-links button:last-child {
+    border-bottom: none;
+  }
+  
+  .navbar-user {
+    order: -1; /* Pindahkan email ke atas (opsional) */
+    color: #A78BFA; /* Beri warna ungu */
+  }
+  
+  /* Tombol di mobile harus full-width */
+  .navbar-links a.navbar-button,
+  .navbar-logout-btn {
+    border-radius: 0;
+    margin: 0;
+  }
+  
+  /* Sesuaikan posisi badge di mobile */
+  .cart-badge {
+    top: 0px;
+    right: calc(50% - 30px); /* Posisikan badge di tengah link */
+  }
 }
