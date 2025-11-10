@@ -330,6 +330,50 @@
   .transaction-filters select {
     width: 100%;
   }
+  .transaction-detail-item {
+     flex-direction: column; /* Tumpuk semua item secara vertikal */
+     align-items: stretch; /* Buat semua item full-width */
+     gap: 1rem;
+  }
+  .list-item-image,
+  .list-item-image-placeholder {
+    width: 100%; 
+    height: 250px; 
+    object-fit: contain; /* Tampilkan gambar penuh */
+  }
+  
+  /* Tengahkan info */
+  .detail-item-info {
+    text-align: center; 
+  }
+  
+  /* Tengahkan input kuantitas */
+  .cart-item-quantity {
+    margin: 0 auto; 
+  }
+  
+  /* Tengahkan subtotal */
+  .detail-item-subtotal {
+    margin: 0;
+    text-align: center; 
+    font-size: 1.25rem;
+    width: auto; /* Hapus lebar tetap */
+  }
+  
+  /* Tengahkan tombol hapus */
+  .cart-item-remove {
+    display: flex;
+    justify-content: center;
+  }
+  .cart-item-remove .delete-book-btn {
+    width: 100%;
+    max-width: 200px; /* Batasi lebar tombol hapus */
+  }
+
+  /* Posisikan total dan tombol checkout di tengah */
+  .checkout-summary {
+    align-items: center;
+  }
 }
 
 @media (max-width: 480px) {
