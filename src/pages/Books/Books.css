@@ -644,3 +644,25 @@
     padding: 0.75rem 0.5rem; /* Beri padding lebih */
   }
 }
+
+@media (max-width: 600px) {
+
+  /* 1. Hapus layout 2-kolom */
+  .book-detail-grid {
+    grid-template-columns: 1fr; 
+    gap: 1rem; /* Beri jarak antar baris */
+  }
+
+  /* 2. Buat "Penulis:", "Penerbit:", dll. terlihat seperti sub-judul */
+  .book-detail-grid strong {
+    color: #9CA3AF; /* Abu-abu */
+    font-size: 0.9rem;
+    margin-bottom: -0.25rem; /* Dekatkan ke nilainya */
+  }
+
+  /* 3. Perbesar teks nilainya */
+  .book-detail-grid p {
+    font-size: 1.1rem; 
+    margin: 0;
+  }
+}
