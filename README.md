@@ -136,3 +136,64 @@ npm run dev
     - axios.create(): Membuat instansi dengan konfigurasi default, terutama baseURL, sehingga request tidak perlu mengulang URL backend secara penuh.
 
     - api.interceptors.request.use(): Menerapkan interceptor pada request. Fungsi ini akan dieksekusi sebelum setiap request dikirim. Tujuannya adalah untuk mengambil token dari localStorage dan secara otomatis menambahkannya ke header Authorization jika token tersebut ada. Ini mengotomatiskan pengiriman token untuk semua endpoint yang aman.
+
+## Fitur & Fungsionalitas
+Website ini adalah frontend untuk "IT Literature Shop" yang dibangun menggunakan React + TypeScript.  Fitur-fiturnya mencakup alur autentikasi, katalog publik, manajemen admin, dan sistem keranjang belanja dengan checkout.
+
+1. Autentikasi Pengguna
+
+- Halaman Login & Register: Halaman bagi pengguna untuk masuk dan mendaftar akun. Halaman ini menggunakan tema gelap yang konsisten dengan handling error dari server (misalnya, "Email sudah terdaftar").
+
+![register](public/register.png)
+
+![login](public/login.png)
+
+- Navbar Dinamis: Navbar akan berubah menggunakan conditional rendering. Pengguna yang belum login akan melihat tombol "Login" dan "Register". Pengguna yang sudah login akan melihat email mereka, tombol "Logout", dan link ke halaman terproteksi.
+
+![navbar](public/navbar.png)
+
+2. Katalog & Detail Buku
+
+- Halaman Katalog (Homepage): Halaman utama yang menampilkan semua buku dalam layout grid yang responsif. Pengguna (termasuk tamu) dapat mencari, memfilter, dan menyortir buku.
+
+![homepage](public/homepage.png)
+
+- Halaman Detail Buku: Halaman dinamis (/books/:id)  yang menampilkan informasi lengkap buku, termasuk gambar, deskripsi, stok, dan harga.
+
+![detailbuku](public/detailbuku.png)
+
+- Alur "Tambah ke Keranjang": Pengguna yang belum login akan melihat tombol "Login untuk Membeli". Pengguna yang sudah login dapat menambahkan buku ke keranjang, lengkap dengan input kuantitas.
+
+![tambahkeranjang](public/tambahkeranjang.png)
+
+3. Manajemen & Admin
+
+- Kelola Buku: Halaman yang menampilkan semua buku dalam tampilan daftar (list view) yang rapi. Dapat melihat tombol "Detail", "Edit", dan "Hapus" (soft delete)  untuk setiap buku.
+
+![kelolabuku](public/kelolabuku.png)
+
+- Tambah Buku: Form admin untuk menambahkan buku baru, termasuk input untuk FormData (upload gambar opsional). Form ini memiliki validasi real-time untuk mencegah input negatif atau tidak valid.
+
+![tambahbuku](public/tambahbuku.png)
+
+- Edit Buku: Form admin untuk memperbarui data buku yang sudah ada. Form ini mengambil data buku saat ini dan mengizinkan pembaruan parsial (hanya field yang diubah).
+
+![editbuku](public/editbuku.png)
+
+- Kelola Genre: Halaman admin (/genres) untuk melakukan operasi CRUD (Tambah, Edit, Hapus) pada genre buku.
+
+![kelolagenres](public/kelolagenres.png)
+
+4. Alur Transaksi & Keranjang Belanja
+
+- Keranjang Belanja: Halaman (/cart) yang mengambil item dari CartContext. Pengguna dapat menyesuaikan kuantitas atau menghapus item. Total belanja akan dihitung secara otomatis.
+
+![keranjang](public/keranjang.png)
+
+- Riwayat Transaksi: Halaman terproteksi (/transactions) yang menampilkan daftar semua transaksi yang telah dilakukan oleh pengguna, lengkap dengan tanggal, status, total harga, dan fitur filter. 
+
+![transaksi](public/transaksi.png)
+
+- Detail Transaksi: Halaman dinamis (/transactions/:id) yang menampilkan rincian lengkap dari satu transaksi, termasuk item yang dibeli dan bukti pembayaran yang di-upload. 
+
+![detailtransaksi](public/detailtransaksi.png)
