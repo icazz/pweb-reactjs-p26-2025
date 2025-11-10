@@ -338,3 +338,45 @@
     align-items: flex-start;
   }
 }
+
+/* --- Tombol "Lihat Detail" tetap di kanan di layar besar, pindah ke bawah di layar kecil --- */
+
+/* Struktur normal (desktop) */
+.transaction-card,
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Responsif: ubah tata letak saat layar sempit */
+@media (max-width: 600px) {
+  .transaction-card,
+  .transaction-item {
+    flex-direction: column; /* ubah jadi vertikal */
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  /* Tombol Lihat Detail jadi full-width di bawah */
+  .transaction-card a,
+  .transaction-item a {
+    align-self: stretch;         /* ambil lebar penuh parent */
+    text-align: center;
+    white-space: nowrap;         /* tetap 1 baris */
+    background-color: #111827;
+    color: #60A5FA;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.6rem 0;
+    transition: background-color 0.2s;
+  }
+
+  .transaction-card a:hover,
+  .transaction-item a:hover {
+    background-color: #374151;
+  }
+}
