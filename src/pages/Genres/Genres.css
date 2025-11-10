@@ -2,24 +2,27 @@
 
 .genre-manage-container {
   max-width: 800px;
-  margin: 2rem auto; /* Beri jarak dari navbar */
+  margin: 2rem auto;
   padding: 2rem;
-  
-  /* --- REVISI TEMA --- */
-  background-color: #1F2937; /* Latar kartu gelap */
-  border: 1px solid #374151; /* Border gelap */
+
+  background-color: #1F2937;
+  border: 1px solid #374151;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Tambahan agar padding tidak mepet di HP */
+  box-sizing: border-box;
 }
 
 .genre-manage-container h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
   text-align: center;
-  color: #FFFFFF; /* Teks putih */
+  color: #FFFFFF;
+  font-size: 1.75rem;
 }
 
-/* Form Styling (Add & Edit) */
+/* Form Styling */
 .genre-form {
   display: flex;
   gap: 0.5rem;
@@ -31,20 +34,18 @@
   padding: 0.75rem;
   border-radius: 5px;
   font-size: 1rem;
-  
-  /* --- REVISI TEMA --- */
-  border: 1px solid #374151; /* Border gelap */
-  background-color: #111827; /* Latar input lebih gelap */
-  color: #f9f9f9; /* Teks input putih */
+
+  border: 1px solid #374151;
+  background-color: #111827;
+  color: #f9f9f9;
 }
 
 .genre-form input[type="text"]:focus {
   outline: none;
-  border-color: #6A11CB; /* Border ungu saat fokus */
+  border-color: #6A11CB;
   box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.3);
 }
 
-/* Tombol (Biru/Ungu) */
 .genre-form button {
   padding: 0.75rem 1rem;
   font-size: 1rem;
@@ -52,8 +53,7 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  
-  /* --- REVISI TEMA --- */
+
   background: linear-gradient(to right, #6A11CB, #2575FC);
   color: white;
   transition: all 0.2s;
@@ -76,17 +76,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  
-  /* --- REVISI TEMA --- */
-  border: 1px solid #374151; /* Border gelap */
-  background-color: #374151; /* Latar item (sedikit lebih terang) */
+
+  border: 1px solid #374151;
+  background-color: #374151;
   border-radius: 5px;
 }
 
 .genre-name {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #FFFFFF; /* Teks putih */
+  color: #FFFFFF;
+  word-break: break-word;
 }
 
 .genre-actions {
@@ -94,7 +94,6 @@
   gap: 0.5rem;
 }
 
-/* Style tombol (Biarkan warna kuning & merah untuk aksi) */
 .genre-actions button {
   padding: 0.5rem 0.75rem;
   border: none;
@@ -104,25 +103,96 @@
 }
 
 .edit-btn, .save-btn {
-  background-color: #ffc107; /* Kuning */
+  background-color: #ffc107;
   color: #333;
 }
 .delete-btn, .cancel-btn {
-  background-color: #d9534f; /* Merah */
+  background-color: #d9534f;
   color: white;
 }
 .cancel-btn {
-  background-color: #6c757d; /* Abu-abu */
+  background-color: #6c757d;
 }
 
-/* Style untuk error state */
+/* Error State */
 .error-state {
-  /* --- REVISI TEMA --- */
-  color: #F87171; /* Merah muda */
-  background-color: #371A1A; /* Background merah gelap */
-  border: 1px solid #7F1D1D; /* Border merah */
+  color: #F87171;
+  background-color: #371A1A;
+  border: 1px solid #7F1D1D;
   border-radius: 5px;
   padding: 1rem;
   margin-bottom: 1.5rem;
   text-align: center;
+}
+
+/* ==========================================================
+   🌐 RESPONSIVE DESIGN
+   ========================================================== */
+
+/* Tablet (<= 768px) */
+@media (max-width: 768px) {
+  .genre-manage-container {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .genre-form {
+    flex-direction: column;
+  }
+
+  .genre-form input[type="text"],
+  .genre-form button {
+    width: 100%;
+  }
+
+  .genre-form button {
+    margin-top: 0.5rem;
+  }
+
+  .genre-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .genre-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .genre-actions button {
+    flex: 1 1 48%;
+  }
+}
+
+/* Smartphone (<= 480px) */
+@media (max-width: 480px) {
+  .genre-manage-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .genre-manage-container h2 {
+    font-size: 1.4rem;
+  }
+
+  .genre-name {
+    font-size: 1rem;
+  }
+
+  .genre-form input[type="text"] {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .genre-form button {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .genre-actions button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
 }

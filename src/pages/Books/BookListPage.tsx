@@ -73,13 +73,13 @@ const BookListPage: React.FC = () => {
 
       <select value={filterCondition} onChange={(e) => setFilterCondition(e.target.value as any)}>
         <option value="all">Semua Buku</option>
-        <option value="available">Tersedia (Stok &gt; 0)</option>
-        <option value="outofstock">Habis (Stok = 0)</option>
+        <option value="available">Tersedia </option>
+        <option value="outofstock">Habis </option>
       </select>
 
 
         <select value={orderByTitle} onChange={(e) => setOrderByTitle(e.target.value as any)}>
-          <option value="">Sortir Judul</option>
+
           <option value="asc">Judul (A-Z)</option>
           <option value="desc">Judul (Z-A)</option>
         </select>
