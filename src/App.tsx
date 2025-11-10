@@ -16,6 +16,7 @@ import AddBookPage from './pages/Books/AddBookPage';
 import TransactionListPage from './pages/Transactions/TransactionListPage';
 import TransactionDetailPage from './pages/Transactions/TransactionDetailPage';
 import CheckoutPage from './pages/Transactions/CheckoutPage';
+import CartPage from './pages/Transactions/CartPage';
 
 // Import Route Protector
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -49,8 +50,9 @@ function App() {
             <Route path="/genres" element={<ManageGenresPage />} />
             
             <Route path="/transactions" element={<TransactionListPage />} />
-            <Route path="/transactions/checkout" element={<CheckoutPage />} />
+            {/* <Route path="/transactions/checkout" element={<CheckoutPage />} /> */}
             <Route path="/transactions/:id" element={<TransactionDetailPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Route>
           
           {/* Rute 404 (Not Found) */}

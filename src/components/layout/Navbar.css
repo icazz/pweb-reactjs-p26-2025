@@ -98,3 +98,30 @@
 .navbar-logout-btn:hover {
   background-color: #c9302c;
 }
+
+/* src/components/layout/Navbar.css */
+/* ... (style .navbar, .navbar-links, dll. Anda) ... */
+
+/* --- TAMBAHKAN STYLE INI --- */
+
+.navbar-cart-link {
+  position: relative; /* Diperlukan untuk positioning badge */
+  padding: 0.25rem 0.5rem;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #6A11CB; /* Ungu */
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 2px solid #1F2937; /* Border agar menyatu dgn navbar */
+}

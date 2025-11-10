@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getBookByIdService } from '../../services/bookService';
 import type { Book, Genre } from '../../types/book.types'; // Pastikan tipe Anda menyertakan 'book_image'
 import { useAuth } from '../../contexts/AuthContext'; // 2. IMPORT useAuth
+import { useCart } from '../../contexts/CartContext';
 import './Books.css';
 
 const BookDetailPage: React.FC = () => {
@@ -13,6 +14,8 @@ const BookDetailPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { token } = useAuth();
+  const { addToCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     if (!id) return; 
@@ -30,6 +33,23 @@ const BookDetailPage: React.FC = () => {
     };
     fetchBook();
   }, [id]);
+
+const handleAddToCart = () => {
+    if (!book) return;
+    
+    // Validasi kuantitas
+    if (quantity > book.stockQuantity) {
+      alert("Stok tidak mencukupi!");
+      return;
+    }
+    if (quantity <= 0) {
+      alert("Jumlah tidak valid");
+      return;
+    }
+
+    addToCart(book, quantity);
+    alert(`${quantity} x "${book.title}" berhasil ditambahkan ke keranjang!`);
+  };
 
   if (loading) return <div className="loading-state">Loading detail buku...</div>;
   if (error) return <div className="error-state">Error: {error}</div>;
@@ -99,16 +119,37 @@ const BookDetailPage: React.FC = () => {
       {/* --- AKHIR REVISI 2 --- */}
 
       {token ? (
-        // Jika user SUDAH login: Tampilkan tombol Beli
-        <button
-            className="form-button"
-            style={{ marginTop: '2rem', width: '100%' }}
-            disabled={book.stockQuantity === 0}
-          >
-            {book.stockQuantity > 0 ? 'Beli Sekarang' : 'Stok Habis'}
-          </button>
+        // --- JIKA SUDAH LOGIN (Tampilkan Add to Cart) ---
+        <div className="buy-action-container">
+          {/* Input Kuantitas */}
+          <div className="form-group">
+            <label htmlFor="quantity">Jumlah:</label>
+            <input 
+              id="quantity"
+              type="number"
+              className="checkout-quantity" // Pinjam style
+              value={quantity}
+              min="1"
+              max={book.stockQuantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              onKeyDown={(e) => { // Blok desimal/minus
+                if (e.key === '-' || e.key === '.' || e.key === ',') {
+                  e.preventDefault();
+                }
+              }}
+            />
+          </div>
+          {/* Tombol Add to Cart */}
+          <button
+              className="form-button"
+              disabled={book.stockQuantity === 0}
+            onClick={handleAddToCart}
+            >
+              {book.stockQuantity > 0 ? 'Tambah ke Keranjang' : 'Stok Habis'}
+            </button>
+        </div>
       ) : (
-        // Jika user BELUM login: Tampilkan tombol Link ke Login
+        // --- JIKA BELUM LOGIN (Tampilkan Link Login) ---
         <div className="login-prompt-button">
           <Link to="/login">Login untuk Membeli</Link>
         </div>

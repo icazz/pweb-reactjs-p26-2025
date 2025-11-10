@@ -151,13 +151,18 @@
 
 .transaction-detail-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Ubah dari space-between */
   align-items: center;
+  gap: 1rem; /* Beri jarak antar elemen */
   padding: 1rem;
   background-color: #374151;
   border-radius: 5px;
 }
-.detail-item-info { flex-grow: 1; }
+/* Info (Judul & Harga Satuan) */
+.detail-item-info { 
+  flex-grow: 1; /* Ambil sisa ruang */
+  min-width: 0; /* Mencegah overflow */
+}
 .detail-item-info p { margin: 0; }
 .detail-item-info .item-title {
   font-size: 1.1rem;
@@ -168,12 +173,51 @@
   color: #D1D5DB;
   font-size: 0.9rem;
 }
+
+.cart-item-quantity {
+  flex-shrink: 0; /* Jangan susutkan */
+}
+.checkout-quantity {
+  width: 80px; /* Perkecil sedikit */
+  padding: 0.5rem; /* Perkecil padding */
+  /* (Style lain dari .checkout-quantity sudah benar) */
+}
+
 .detail-item-subtotal {
   font-size: 1.1rem;
   font-weight: bold;
   color: #FFFFFF;
   flex-shrink: 0;
-  margin-left: 1rem;
+  width: 130px; /* Beri lebar tetap */
+  text-align: right; /* Rata kanan */
+  margin-left: auto;
+}
+
+.cart-item-remove {
+  flex-shrink: 0;
+}
+
+.checkout-summary {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #374151;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Posisikan di kanan */
+  gap: 1rem;
+}
+
+.checkout-summary h3 {
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* Pastikan tombol checkout (add-book-link) memiliki lebar yang pas */
+.checkout-summary .add-book-link {
+  width: 100%;
+  max-width: 300px; /* Batasi lebar tombol checkout */
+  text-align: center;
 }
 
 .loading-state,

@@ -10,6 +10,7 @@ const EditBookPage: React.FC = () => {
   const { id } = useParams<{ id: string }>(); 
   
   // State untuk semua field
+  const [originalTitle, setOriginalTitle] = useState('');
   const [title, setTitle] = useState('');
   const [writer, setWriter] = useState('');
   const [publisher, setPublisher] = useState('');
@@ -44,6 +45,7 @@ const EditBookPage: React.FC = () => {
         
         // Isi form dengan data yang ada
         setTitle(bookData.title);
+        setOriginalTitle(bookData.title);
         setWriter(bookData.writer);
         setPublisher(bookData.publisher);
         setPublicationYear(String(bookData.publicationYear));
@@ -137,7 +139,7 @@ const EditBookPage: React.FC = () => {
 
   return (
     <div className="book-form-container">
-      <h2>Edit Buku: {title}</h2>
+      <h2>Edit Buku: {originalTitle}</h2>
       
       {error && (
         <div className="error-state" style={{ marginBottom: '1rem' }}>

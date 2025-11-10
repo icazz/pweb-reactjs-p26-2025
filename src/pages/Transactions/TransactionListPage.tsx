@@ -148,7 +148,7 @@ const TransactionListPage: React.FC = () => {
         <div className="transaction-header">
           <h2>Riwayat Transaksi</h2>
           <div>
-            <Link to="/transactions/checkout" className="add-book-link">Buat Transaksi</Link>
+            {/* <Link to="/transactions/checkout" className="add-book-link">Buat Transaksi</Link> */}
           </div>
         </div>
 
